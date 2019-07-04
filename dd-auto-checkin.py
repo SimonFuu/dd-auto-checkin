@@ -93,12 +93,15 @@ class CheckIn:
         if action == 'checkin':
             action_list.append(self.adb_tap_checkin)
         else:
-            action_list.append(self.adb_tap_checkin)
+            action_list.append(self.adb_tap_checkout)
         action_list.append(self.adb_screen_cap)
         action_list.append(self.adb_pull_screen_cap)
         for item in action_list:
             print(item)
-            time.sleep(1)
+            process = subprocess.Popen(item, shell=False, stdout=subprocess.PIPE)
+            process.wait()
+            time.sleep(5)
+
 
 def random_delay():
     """
